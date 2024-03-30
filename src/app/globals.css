@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    position: relative;
+}
+
+.root {
+    /* min-height: 100vh; */
+}
+
+/* pagination bullet  */
+span.swiper-pagination-bullet {
+    background-color: #777777;
+    opacity: 0.75;
+    cursor: pointer;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #DB4444 !important;
+}
+
+/* pagination for hero slider */
+.with-number-pagination .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: auto;
+    bottom: 1rem;
+    left: 2.5rem;
+    z-index: 4;
+    color: white;
+    gap: 2rem;
+}
+
+html[dir="rtl"] .with-number-pagination .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
+    left: 0 !important;
+    right: 2.5rem;
+}
+
+@media (min-width: 768px) {
+    .with-number-pagination .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
+        bottom: 1.5rem;
+    }
+}
+
+.with-number-pagination .swiper-pagination-bullet {
+    background: none !important;
+    color: #fff !important;
+    opacity: 1 !important;
+    display: flex;
+    height: 1.5rem;
+    width: 1rem;
+    align-items: center;
+    gap: 0.5rem;
+    flex-direction: row-reverse;
+    border-style: none;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-weight: 700;
+    --tw-text-opacity: 1;
+    color: #fff;
+    color: rgba(255, 255, 255, var(--tw-text-opacity));
+    opacity: .5;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(.55, 0, .1, 1);
+}
+
+.with-number-pagination .swiper-pagination-bullet-active {
+    width: 2rem;
+    opacity: 1;
+}
+
+.with-number-pagination .swiper-pagination-bullet-active::after {
+    height: 0.125rem;
+    flex-shrink: 0;
+    flex-grow: 1;
+    --tw-bg-opacity: 1;
+    background-color: #fff;
+    background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+    --tw-content: "";
+    content: "";
+    content: var(--tw-content);
+    width: 1rem;
+}
+
+/* arrow-icon */
+.link-arrowed {
+    display: flex;
+    height: 2rem;
+    line-height: 2rem;
+}
+
+.arrow-icon {
+    position: relative;
+    top: -1px;
+    transition: transform 0.3s ease;
+    vertical-align: middle;
+    -webkit-transition: transform 0.3s ease;
+    -moz-transition: transform 0.3s ease;
+    -ms-transition: transform 0.3s ease;
+    -o-transition: transform 0.3s ease;
+}
+
+.arrow-icon-circle {
+    transition: stroke-dashoffset 0.3s ease;
+    stroke-dasharray: 95;
+    stroke-dashoffset: 95;
+}
+
+.link-arrowed:hover .arrow-icon {
+    transform: translate3d(5px, 0, 0);
+}
+
+.link-arrowed:hover .arrow-icon-circle {
+    stroke-dashoffset: 0;
+}
+
+.react-datepicker-wrapper {
+    width: 100%;
+}
+
+.main-btn {
+    position: relative;
+    padding: 10px 22px;
+    border-radius: 6px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    background-color: #f08322;
+    transition: all 0.2s ease;
+}
+
+.main-btn:hover {
+    filter: brightness(1.2);
+    -webkit-filter: brightness(1.2);
+}
+
+.main-btn:active {
+    transform: scale(0.96);
+}
+
+.main-btn:disabled {
+    opacity: .75;
+    cursor: not-allowed;
+}
+
+.main-btn:disabled:hover {
+    filter: brightness(.90);
+    -webkit-filter: brightness(.90);
+}
