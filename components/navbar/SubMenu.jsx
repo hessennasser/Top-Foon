@@ -13,7 +13,7 @@ import { useTranslation } from "@/src/app/i18n/client";
 const SubMenu = ({ user }) => {
     const { logout } = useContext(MainContext);
     const { t, i18n } = useTranslation();
-    console.log(i18n);
+
     return (
         <div
             className={`absolute top-20 ${i18n.language == "ar" ? "right" : "left"}-1/2 translate-x-1/2 md:${i18n.language == "ar" ? "left" : "right"}-20 md:translate-x-0 w-full max-w-72 md:max-w-sm rounded-lg bg-slate-500 text-white shadow-2xl p-4 flex flex-col gap-2 z-10`}

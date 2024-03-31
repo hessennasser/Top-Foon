@@ -6,6 +6,10 @@ const ThanksPage = () => {
     const [paymentData, setPaymentData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [dataMismatch, setDataMismatch] = useState(false);
+    const [id, setId] = useState(null);
+    const [status, setStatus] = useState(null);
+    const [amount, setAmount] = useState(null);
+    const [message, setMessage] = useState(null);
 
     useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search);
@@ -33,16 +37,17 @@ const ThanksPage = () => {
         if (typeof window !== 'undefined') {
             fetchPayment();
         }
+
+        // Set state variables
+        setId(id);
+        setStatus(status);
+        setAmount(amount);
+        setMessage(message);
     }, []);
 
     useEffect(() => {
         if (paymentData) {
-            const queryParams = new URLSearchParams(window.location.search);
-            const id = queryParams.get('id');
-            const status = queryParams.get('status');
-            const amount = queryParams.get('amount');
-            const message = queryParams.get('message');
-
+            // Check for data mismatch
             if (
                 paymentData.id !== id ||
                 paymentData.status !== status ||
@@ -51,7 +56,7 @@ const ThanksPage = () => {
                 setDataMismatch(true);
             }
         }
-    }, [paymentData]);
+    }, [paymentData, id, status, amount]);
 
     if (loading) {
         return <div>Loading...</div>;

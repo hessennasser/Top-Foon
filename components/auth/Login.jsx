@@ -177,12 +177,12 @@ const Login = () => {
                                 />
                                 {showPassword ? (
                                     <FaEyeSlash
-                                        className={`text-xl absoluteend-4 top-[2.4rem] cursor-pointer`}
+                                        className={`text-xl absolute end-4 top-[2.4rem] cursor-pointer`}
                                         onClick={() => setShowPassword(!showPassword)}
                                     />
                                 ) : (
                                     <FaRegEye
-                                        className={`text-xl absoluteend-4 top-[2.4rem] cursor-pointer`}
+                                        className={`text-xl absolute end-4 top-[2.4rem] cursor-pointer`}
                                         onClick={() => setShowPassword(!showPassword)}
                                     />
                                 )}

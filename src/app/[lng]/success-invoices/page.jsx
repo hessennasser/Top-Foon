@@ -1,4 +1,3 @@
-"use client"
 import { apiUrl } from '@/apiUrl';
 import { mainRequest } from '@/axiosConfig';
 import axios from 'axios';
@@ -57,6 +56,11 @@ const SuccessInvoicesPage = () => {
     if (loading) {
         return <div>Loading...</div>;
     }
+
+    const queryParams = new URLSearchParams(window.location.search);
+    const invoice_id = queryParams.get('invoice_id');
+    const status = queryParams.get('status');
+    const message = queryParams.get('message');
 
     return (
         <div>

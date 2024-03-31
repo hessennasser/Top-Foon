@@ -3,7 +3,7 @@
 import { apiUrl } from "@/apiUrl";
 import Loading from "@/components/Loading";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper/modules';
@@ -15,13 +15,21 @@ import { MdSystemSecurityUpdateGood } from "react-icons/md";
 import { FaShippingFast } from "react-icons/fa";
 import { useTranslation } from "@/src/app/i18n/client";
 import Image from "next/image";
+import { MainContext } from "@/mainContext";
 
 const Page = ({ params }) => {
-    const { t, i18n } = useTranslation();
     const { productId } = params;
 
     const [product, setProduct] = useState();
     const [loading, setLoading] = useState(false);
+    const { t, i18n } = useTranslation();
+    const { addToCart } = useContext(MainContext);
+
+    const [quantityInput, setQuantityInput] = useState(1);
+    const [metaData, setMetaData] = useState({
+        color: "",
+        storage: ""
+    });
 
     const fetchData = async () => {
         setLoading(true);
@@ -40,14 +48,61 @@ const Page = ({ params }) => {
         fetchData();
     }, [productId]);
 
+
+    const handleInputChange = (value) => {
+        if (value > 0) {
+            setQuantityInput(value);
+        }
+    };
+
+    const handleIncrement = () => {
+        setQuantityInput((prev) => prev + 1);
+    };
+
+    const handleDecrement = () => {
+        if (quantity > 1) {
+            setQuantityInput((prev) => prev - 1);
+        }
+    };
+
+    const handleColorChange = (e) => {
+        // Update color in metaData
+        const selectedColor = e.target.value;
+        setMetaData({
+            ...metaData,
+            color: selectedColor
+        });
+    };
+
+    const handleStorageChange = (storage) => {
+        // Update storage in metaData
+        setMetaData({
+            ...metaData,
+            storage: storage
+        });
+    };
+
+
+    const handleAddToCart = () => {
+        // Prepare cart item data
+        const cartItem = {
+            product: product, // Assuming product data is available
+            quantity: quantityInput,
+            metaData: metaData
+        };
+
+        // Call addToCart function from context to add the item to the cart
+        addToCart(cartItem);
+    };
+
     if (loading || !product) {
         return <Loading />
     }
 
     return (
         <div className="container py-10">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10 relative">
-                <div className="img-holder lg:sticky top-0 h-fit p-5 col-span-3 md:col-span-2 lg:col-span-1 flex justify-center border p-4 shadow-lg rounded-md max-h-[400px]">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-10 relative">
+                <div className="img-holder h-full lg:sticky top-0 col-span-3 md:col-span-2 lg:col-span-1 flex justify-center border p-4 shadow-lg rounded-md max-h-[400px]">
                     {product?.images && product?.images.length > 0 && (
                         <Swiper
                             slidesPerView={1}
@@ -69,7 +124,7 @@ const Page = ({ params }) => {
                         </Swiper>
                     )}
                 </div>
-                <div className="info-holder flex flex-col gap-4 border p-4 shadow-lg rounded-md">
+                <div className="info-holder col-span-3 md:col-span-1 lg:col-span-1 h-full flex flex-col gap-4 border p-4 shadow-lg rounded-md">
                     <h2 className="text-xl font-bold text-mainColor">{product?.name[i18n.language]}</h2>
                     <div className="Category my-2">
                         <strong>{t("Category")} : </strong>
@@ -96,9 +151,68 @@ const Page = ({ params }) => {
                         <strong>{t("Storages")}</strong>
                         {
                             product.storages.map((storage, index) => (
-                                <p key={index} className="text-gray-600">{storage.name} : ${storage.price}</p>
+                                <p key={index} className="text-gray-600">{storage.name} :
+                                    ${parseInt(storage.price) + parseInt(product.discount)}</p>
                             ))
                         }
+                    </div>
+                </div>
+                <div className="cart-holder col-span-3 md:col-span-1 lg:col-span-1 h-full flex flex-col gap-4 border p-4 shadow-lg rounded-md">
+                    <div className="flex flex-col flex-1 gap-2">
+                        <h2 className="text-xl font-semibold">{product?.name[t.language]}</h2>
+                        <p className="text-gray-600">{t('price')}: ${product?.discount}</p>
+                        <div className="flex items-center gap-2">
+                            <p>{t('color')}: </p>
+                            {
+                                product.colors.map((color, index) => (
+                                    <div key={index} className="mr-2 flex items-center gap-1">
+                                        <label className="flex items-center gap-1">
+                                            <input
+                                                type="radio"
+                                                name={`color`}
+                                                value={color}
+                                                onChange={(e) => handleColorChange(e)}
+                                            />
+                                            <span>{color}</span>
+                                        </label>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                        <div>
+                            <p>{t('storage')}: </p>
+                            {
+                                product.storages.map((storage, index) => (
+                                    <div key={index} className="me-2 flex gap-1">
+                                        <label className="flex gap-1">
+                                            <input
+                                                type="radio"
+                                                name={`storage`}
+                                                value={storage.name}
+                                                onChange={(e) => handleStorageChange(storage)}
+                                            />
+                                            <span key={index} className="text-gray-600 md-2">{storage.name} :
+                                                ${parseInt(storage.price) + parseInt(product.discount)}</span>
+                                        </label>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                        <div className="flex items-center">
+                            <button onClick={() => handleDecrement()} className="w-10 h-full flex items-center justify-center bg-mainColor text-white">-</button>
+                            <input
+                                type="number"
+                                value={quantityInput}
+                                onChange={(e) => handleInputChange(parseInt(e.target.value))}
+                                className="w-20 h-full border border-gray-300 focus:outline-none px-2 py-1 text-center"
+                            />
+                            <button onClick={() => handleIncrement()} className="w-10 h-full flex items-center justify-center bg-mainColor text-white">+</button>
+                        </div>
+                        <div className="flex-1 flex  justify-center items-end">
+                            <button onClick={handleAddToCart} className="w-full main-btn">
+                                Add to Cart
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

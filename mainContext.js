@@ -43,12 +43,24 @@ function MainContextProvider({ children }) {
 
     // Manage Cart
     const addToCart = async (item) => {
-        // Check if the product has metadata
+        // Check if the user is logged in
         if (user.logged) {
-            await addToCartApi(item, item.colors[0], item.storages[0]); // Pass defaultMetadata to addToCartApi
-            console.log(item);
+            // Determine the quantity
+            const quantity = item.quantity || 1;
+
+            // Determine the color
+            const color = item.metaData?.color || (item.colors && item.colors[0]);
+
+            // Determine the storage
+            const storage = item.metaData?.storage || (item.storages && item.storages[0]);
+
+            // Add the item to the cart
+            await addToCartApi(item.product, quantity, color, storage);
+
+            // Refresh the user's cart
             await getUserCart();
         } else {
+            // Inform the user to log in and redirect to the login page
             toast.info("Please log in to add items to your cart.");
             router.push("/login");
         }
@@ -109,14 +121,14 @@ function MainContextProvider({ children }) {
     }, [user?.logged]);
 
     // API cart management functions
-    const addToCartApi = async (item, color, storage) => {
+    const addToCartApi = async (item, quantity, color, storage) => {
         setLoadingCart(true);
         try {
             // Extract necessary properties from the item
             const { _id: productId } = item;
             console.log(color, storage);
             // Send request to add item to cart with product ID, quantity, and metadata
-            const response = await mainRequest.post(`${apiUrl}/add-to-cart`, { productId, quantity: 1, color, storage });
+            const response = await mainRequest.post(`${apiUrl}/add-to-cart`, { productId, quantity, color, storage });
 
             // Update cart state with the updated cart items from the response
             const updatedCart = response.data.cart.items;

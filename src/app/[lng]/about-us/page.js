@@ -3,6 +3,7 @@ import { MainContext } from '@/mainContext';
 import Image from 'next/image';
 import React, { useContext } from 'react'
 import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import PaymentImage from "../../../../public/payments.png"
 
 const page = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -31,7 +32,7 @@ const page = () => {
                         <FaInstagram size={24} />
                     </a>
                 </div>
-                <Image src="/payments.png" alt="Payment Methods" className='object-contain' width={150} height={50} />
+                <Image src={PaymentImage} alt="Payment Methods" className='object-contain' width={150} height={50} />
             </div>
         </div >
     )

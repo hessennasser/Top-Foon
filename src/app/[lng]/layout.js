@@ -21,8 +21,8 @@ export default function RootLayout({
   return (
     <html lang={lng} dir={dir(lng)}>
       <head>
-        <link rel="stylesheet" href="https://cdn.moyasar.com/mpf/1.13.0/moyasar.css" />
-        <script src="https://cdn.moyasar.com/mpf/1.13.0/moyasar.js" async></script>
+        <title>Top Foon</title>
+        <link rel="icon" href="/favIcon.png" />
       </head>
       <body >
         <ToastContainer
