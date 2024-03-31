@@ -4,18 +4,15 @@ import { mainRequest } from '@/axiosConfig';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-const ThanksPage = () => {
-    // Extract query parameters from window.location.search
-    const queryParams = new URLSearchParams(window.location.search);
-    const invoice_id = queryParams.get('invoice_id');
-    const status = queryParams.get('status');
-    const message = queryParams.get('message');
-
+const SuccessInvoicesPage = () => {
     const [paymentData, setPaymentData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [dataMismatch, setDataMismatch] = useState(false);
 
     useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search);
+        const invoice_id = queryParams.get('invoice_id');
+
         const fetchPayment = async () => {
             try {
                 const response = await axios.get(`https://api.moyasar.com/v1/invoices/${invoice_id}`, {
@@ -34,12 +31,18 @@ const ThanksPage = () => {
             }
         };
 
-        fetchPayment();
-    }, [invoice_id]);
+        if (typeof window !== 'undefined') {
+            fetchPayment();
+        }
+    }, []);
 
-    // Check if the fetched payment data matches the data from the URL parameters
     useEffect(() => {
         if (paymentData) {
+            const queryParams = new URLSearchParams(window.location.search);
+            const invoice_id = queryParams.get('invoice_id');
+            const status = queryParams.get('status');
+            const message = queryParams.get('message');
+
             console.log(paymentData.payments[0]?.invoice_id);
             console.log(invoice_id);
             if (
@@ -49,7 +52,7 @@ const ThanksPage = () => {
                 setDataMismatch(true);
             }
         }
-    }, [paymentData, invoice_id, status, message]);
+    }, [paymentData]);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -72,4 +75,4 @@ const ThanksPage = () => {
     );
 };
 
-export default ThanksPage;
+export default SuccessInvoicesPage;

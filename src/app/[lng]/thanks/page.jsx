@@ -3,18 +3,17 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 const ThanksPage = () => {
-    // Extract query parameters from window.location.search
-    const queryParams = new URLSearchParams(window.location.search);
-    const id = queryParams.get('id');
-    const status = queryParams.get('status');
-    const amount = queryParams.get('amount');
-    const message = queryParams.get('message');
-
     const [paymentData, setPaymentData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [dataMismatch, setDataMismatch] = useState(false);
 
     useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search);
+        const id = queryParams.get('id');
+        const status = queryParams.get('status');
+        const amount = queryParams.get('amount');
+        const message = queryParams.get('message');
+
         const fetchPayment = async () => {
             try {
                 const response = await axios.get(`https://api.moyasar.com/v1/payments/${id}`, {
@@ -31,12 +30,19 @@ const ThanksPage = () => {
             }
         };
 
-        fetchPayment();
-    }, [id]);
+        if (typeof window !== 'undefined') {
+            fetchPayment();
+        }
+    }, []);
 
-    // Check if the fetched payment data matches the data from the URL parameters
     useEffect(() => {
         if (paymentData) {
+            const queryParams = new URLSearchParams(window.location.search);
+            const id = queryParams.get('id');
+            const status = queryParams.get('status');
+            const amount = queryParams.get('amount');
+            const message = queryParams.get('message');
+
             if (
                 paymentData.id !== id ||
                 paymentData.status !== status ||
@@ -45,7 +51,7 @@ const ThanksPage = () => {
                 setDataMismatch(true);
             }
         }
-    }, [paymentData, id, status, amount, message]);
+    }, [paymentData]);
 
     if (loading) {
         return <div>Loading...</div>;

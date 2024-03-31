@@ -10,12 +10,6 @@ import { useTranslation } from '../i18n/client';
 export default function Home({ params: { lng } }) {
   const [slides, setSlides] = useState([]);
   const [categories, setCategories] = useState([]);
-  const { i18n } = useTranslation();
-
-  // useEffect(() => {
-  //   document.dir = i18n.language === 'ar' ? 'rtl' : 'ltr';
-  // }, [i18n.language]);
-
 
   const getAllSlides = async () => {
     try {

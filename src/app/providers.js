@@ -1,5 +1,3 @@
-'use client';
-
 import MainContextProvider from "@/mainContext";
 
 export function Providers({ children }) {

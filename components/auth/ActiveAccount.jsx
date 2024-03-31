@@ -5,14 +5,15 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { apiUrl } from "@/apiUrl";
 import { MainContext } from "@/mainContext";
+import Image from "next/image";
 
 const ActiveAccount = () => {
     const router = useRouter();
     const { user, setUser } = useContext(MainContext);
-    const userActive = JSON.parse(localStorage.getItem("userRegistration"));
+    const userActive = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("userRegistration")) : null;
 
     useEffect(() => {
-        if (!userActive?.activationToken && (!user?.active || user?.active === true)) {
+        if (userActive && (!userActive?.activationToken || (user && user.active))) {
             router.push("/signUp");
         }
     }, []);
@@ -73,9 +74,8 @@ const ActiveAccount = () => {
 
                 // Update local storage to mark the user as active and remove the activation token
                 const updatedUser = { ...userActive, active: true, activationToken: null };
-                localStorage.setItem("userRegistration", JSON.stringify(updatedUser));
+                typeof window !== 'undefined' ? localStorage.setItem("userRegistration", JSON.stringify(updatedUser)) : null;
                 setUser(updatedUser);
-
                 router.push("/login");
             } else {
                 toast.error("فشل تفعيل الحساب. الرجاء المحاولة مرة أخرى.");
@@ -90,10 +90,12 @@ const ActiveAccount = () => {
     return (
         <div className="grid md:grid-cols-2">
             <div className="image">
-                <img
+                <Image
                     src="https://exclusive-ecommerce-client.vercel.app/assets/signup-img-5MB1hWiM.avif"
                     alt="تسجيل"
                     className="w-full h-full object-cover"
+                    width={100}
+                    height={100}
                 />
             </div>
             <div className="py-10 w-full max-w-full px-3 mx-auto mt-0 md:flex-0 shrink-0 flex flex-col items-center justify-center">

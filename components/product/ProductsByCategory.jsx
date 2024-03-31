@@ -1,3 +1,4 @@
+"use client"
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -7,7 +8,6 @@ import 'swiper/css/pagination';
 
 // import required modules
 import { Autoplay, Pagination } from 'swiper/modules';
-import Link from 'next/link';
 import ProductCard from './ProductCard';
 import { useTranslation } from '@/src/app/i18n/client';
 

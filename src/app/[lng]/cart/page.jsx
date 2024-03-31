@@ -7,6 +7,7 @@ import Link from "next/link";
 import Loading from "@/components/Loading";
 import { FaRegSave } from "react-icons/fa";
 import { useTranslation } from "../../i18n/client";
+import Image from "next/image";
 
 const Page = () => {
     const { cart, loadingCart, updateCartItemQuantity, removeFromCart, updateCartItemMetaData, calculateTotalPrice } = useContext(MainContext);
@@ -105,7 +106,7 @@ const Page = () => {
 
                                     return (
                                         <div key={productId} className="bg-white py-4 flex gap-4" dir="rtl">
-                                            <img className="border-l pl-2 w-[80px] object-contain" src={item?.thumbnail?.url} alt={item?.name[t.language]} />
+                                            <Image height={100} width={100} className="border-l pl-2 w-[80px] object-contain" src={item?.thumbnail?.url} alt={item?.name[t.language]} />
 
                                             <div className="flex flex-col flex-1 gap-2">
                                                 <h2 className="text-xl font-semibold">{item?.name[t.language]}</h2>

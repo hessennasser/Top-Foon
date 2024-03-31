@@ -1,3 +1,5 @@
+"use client"
+
 import ActiveAccount from '@/components/auth/ActiveAccount'
 import React from 'react'
 

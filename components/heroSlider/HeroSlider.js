@@ -10,6 +10,7 @@ import 'swiper/css';
 import { Pagination } from 'swiper/modules';
 import Link from 'next/link';
 import { useTranslation } from '@/src/app/i18n/client';
+import Image from 'next/image';
 
 const HeroSlider = ({ slides }) => {
     const { i18n } = useTranslation()
@@ -63,7 +64,9 @@ const HeroSlider = ({ slides }) => {
                                     </div>
                                 </div>
                                 <div>
-                                    <img
+                                    <Image
+                                        width={100}
+                                        height={100}
                                         className="max-h-[220px] md:max-h-[500px] w-full overflow-hidden object-cover"
                                         src={item?.image?.url}
                                         alt={item?.title[i18n.language]}

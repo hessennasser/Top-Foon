@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 import { apiUrl } from "@/apiUrl";
 import Loading from "@/components/Loading";
@@ -13,6 +14,7 @@ import 'swiper/css/navigation';
 import { MdSystemSecurityUpdateGood } from "react-icons/md";
 import { FaShippingFast } from "react-icons/fa";
 import { useTranslation } from "@/src/app/i18n/client";
+import Image from "next/image";
 
 const Page = ({ params }) => {
     const { t, i18n } = useTranslation();
@@ -61,7 +63,7 @@ const Page = ({ params }) => {
                         >
                             {product?.images.map((image) => (
                                 <SwiperSlide key={image.id}>
-                                    <img className='w-full h-full max-h-[400px] object-contain' src={image.url} alt={product?.name[i18n.language]} />
+                                    <Image height={100} width={100} className='w-full h-full max-h-[400px] object-contain' src={image.url} alt={product?.name[i18n.language]} />
                                 </SwiperSlide>
                             ))}
                         </Swiper>

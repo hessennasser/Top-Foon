@@ -10,12 +10,13 @@ import { MainContext } from "@/mainContext";
 import { mainRequest } from "@/axiosConfig";
 import Loading from "../Loading";
 import { useTranslation } from "@/src/app/i18n/client"; // Import the useTranslation hook
+import Image from "next/image";
 
 const Login = () => {
     const router = useRouter();
     const { t, i18n } = useTranslation(); // Access translation functions
     const { cart, settings, user, setUser } = useContext(MainContext);
-    const logged = JSON.parse(localStorage.getItem("userRegistration"))?.logged;
+    const logged = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("userRegistration"))?.logged : null;
     const [loading, setLoading] = useState(false);
 
     const [showPassword, setShowPassword] = useState(false);
@@ -122,7 +123,7 @@ const Login = () => {
     return (
         <div className="grid md:grid-cols-2" >
             <div className="image">
-                <img src="https://exclusive-ecommerce-client.vercel.app/assets/signup-img-5MB1hWiM.avif" alt="تسجيل دخول" className="w-full h-full object-cover" />
+                <Image src="https://exclusive-ecommerce-client.vercel.app/assets/signup-img-5MB1hWiM.avif" alt="تسجيل دخول" className="w-full h-full object-cover" width={100} height={100} />
             </div>
             <div className="py-10 w-full max-w-full px-3 mx-auto mt-0 md:flex-0 shrink-0">
                 <div className="relative z-0 flex flex-col min-w-0 break-words bg-white border-0 shadow-soft-xl rounded-2xl bg-clip-border">

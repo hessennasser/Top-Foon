@@ -176,6 +176,7 @@ const Page = () => {
                 installmentDetails: []
             });
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [installmentDuration, calculateTotalPrice]);
 
     if (loading || !cart) {

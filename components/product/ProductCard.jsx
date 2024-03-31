@@ -4,6 +4,7 @@ import { RiShoppingCart2Line } from "react-icons/ri";
 import { useContext } from "react";
 import { MainContext } from "@/mainContext";
 import { useTranslation } from "@/src/app/i18n/client";
+import Image from "next/image";
 
 const ProductCard = ({ item }) => {
     const { t, i18n } = useTranslation();
@@ -18,7 +19,7 @@ const ProductCard = ({ item }) => {
         <div className="product-card p-2">
             <Link href={`/product/${item?._id}`}>
                 <div className="image-holder relative">
-                    <img className="w-full h-56 md:h-[250px] object-contain md:object-cover" src={item.thumbnail?.url} alt={item?.name[i18n.language]} />
+                    <Image width={100} height={100} className="w-full h-56 md:h-[250px] object-contain md:object-cover" src={item.thumbnail?.url} alt={item?.name[i18n.language]} />
                 </div>
                 <div className="product-info mt-4">
                     <h2 className="product-title font-medium">{item?.name[i18n.language]}</h2>

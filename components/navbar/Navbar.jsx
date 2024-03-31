@@ -10,12 +10,12 @@ import SubMenu from "./SubMenu";
 import { useTranslation } from "@/src/app/i18n/client";
 
 const Navbar = () => {
-    const { t, i18n } = useTranslation(); // Access translation functions and current language
+    const { t, i18n } = useTranslation();
     const router = useRouter();
     const [nav, setNav] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const { settings, cart, user } = useContext(MainContext);
-    const logged = JSON.parse(localStorage.getItem("userRegistration"))?.logged;
+    const logged = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("userRegistration"))?.logged : null;
     const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 
     const links = [

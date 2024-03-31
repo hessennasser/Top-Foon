@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import InstallmentTable from '../InstallmentTable';
 import { useTranslation } from '@/src/app/i18n/client';

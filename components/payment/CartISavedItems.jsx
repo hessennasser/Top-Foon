@@ -1,6 +1,7 @@
 "use client"
 
 import { useTranslation } from "@/src/app/i18n/client"
+import Image from "next/image";
 
 const CartISavedItems = ({ cart, calculateTotalPrice, calculateInstallmentAmountData, installmentDuration }) => {
     const { t, i18n } = useTranslation();
@@ -12,7 +13,7 @@ const CartISavedItems = ({ cart, calculateTotalPrice, calculateInstallmentAmount
                 <div className="grid grid-cols-1 gap-2 relative">
                     {cart.length > 0 && cart.map((item, index) => (
                         <div key={index} className="bg-white py-2 flex gap-4">
-                            <img className="border-l pl-2 w-[80px] object-contain" src={item.product.thumbnail.url} alt={item?.product.name[i18n.language]} />
+                            <Image width={100} height={100} className="border-l pl-2 w-[80px] object-contain" src={item.product.thumbnail.url} alt={item?.product.name[i18n.language]} />
                             <div className="flex flex-col flex-1 gap-2">
                                 <h2 className="text-xl font-semibold">{item?.product.name[i18n.language]}</h2>
                                 <p className="text-gray-600">{t('price')}: ${item.totalForItem}</p>

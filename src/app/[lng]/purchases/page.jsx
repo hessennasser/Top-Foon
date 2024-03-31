@@ -1,8 +1,9 @@
 "use client"
+
 import { useEffect, useState } from 'react';
-import Loading from '../../components/Loading';
 import { mainRequest } from '@/axiosConfig';
 import { apiUrl } from '@/apiUrl';
+import Loading from '@/components/Loading';
 
 const Page = () => {
     const [purchasesOrders, setOrders] = useState([]);

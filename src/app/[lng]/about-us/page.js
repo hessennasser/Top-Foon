@@ -5,6 +5,7 @@ import React, { useContext } from 'react'
 import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 const page = () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { settings } = useContext(MainContext);
 
     return (
