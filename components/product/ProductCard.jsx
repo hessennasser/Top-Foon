@@ -17,7 +17,7 @@ const ProductCard = ({ item }) => {
 
     return (
         <div className="product-card p-2">
-            <Link href={`/${i18n.language}/product/${item?._id}`}>
+            <Link href={`${i18n.language}/product/${item?._id}`}>
                 <div className="image-holder relative">
                     <Image width={100} height={100} className="w-full h-56 md:h-[250px] object-contain md:object-cover" src={item.thumbnail?.url} alt={item?.name[i18n.language]} />
                 </div>
