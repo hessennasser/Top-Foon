@@ -4,7 +4,7 @@ import { MainContext } from '@/mainContext';
 import Image from 'next/image';
 import React, { useContext } from 'react';
 import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa';
-
+import PaymentImage from "../../public/payments.png"
 const Footer = () => {
     const { t } = useTranslation(); // Use useTranslation hook to get the t function
     const { settings } = useContext(MainContext);
@@ -30,7 +30,7 @@ const Footer = () => {
                             <FaInstagram size={24} />
                         </a>
                     </div>
-                    <Image src="/payments.png" alt="Payment Methods" className='object-contain' width={150} height={50} />
+                    <Image src={PaymentImage} alt="Payment Methods" className='object-contain' width={150} height={50} />
                 </div>
                 <div className="flex flex-col gap-4">
                     <h2 className='text-xl font-bold'>{t('contactUs')}</h2>

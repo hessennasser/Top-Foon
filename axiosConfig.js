@@ -39,13 +39,11 @@ const refreshToken = async () => {
 
 // Create an instance of Axios
 export const mainRequest = axios.create({
-    baseURL: apiUrl,
+    baseURL: "https://top-foon-server.onrender.com",
     withCredentials: true,
-    headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json'
-    }
-
+    'Access-Control-Allow-Credentials': true,
+    headers: { 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' },
+    credentials: 'include',
 });
 
 // Add a request interceptor
