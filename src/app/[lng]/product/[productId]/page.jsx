@@ -210,13 +210,16 @@ const Page = ({ params }) => {
                         </div>
                         <div className="flex-1 flex  justify-center items-end">
                             <button onClick={handleAddToCart} className="w-full main-btn">
-                                Add to Cart
+                                {t("Add to Cart")}
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="col-span-3 w-full flex flex-wrap items-center justify-between gap-5 my-5">
+            <div className="w-full border p-4 shadow-lg rounded-md text-center">
+                <p>{product.description[i18n.language]}</p>
+            </div>
+            <div className="w-full flex flex-wrap items-center justify-between gap-5 my-5">
                 <div className="item flex flex-col gap-2 text-center text-lg justify-center items-center w-48 mx-auto">
                     <MdSystemSecurityUpdateGood className='text-3xl text-secondColor' />
                     <p className='font-bold'>{t("Receipt and delivery")}</p>

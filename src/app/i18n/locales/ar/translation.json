@@ -12,9 +12,8 @@
     "email": "البريد الإلكتروني",
     "allRightsReserved": "جميع الحقوق محفوظة",
     "AddToCart": "اضف الى السلة",
+    "Add to Cart": "اضف الى السلة",
     "Cart Content": "محتوى السلة",
-    "Price": "السعر",
-    "Quantity": "الكمية",
     "Color": "اللون",
     "Storage": "المساحة",
     "Total Purchases": "إجمالي المشتريات",
@@ -158,5 +157,13 @@
     "Paid": "تم الدفع",
     "Payment Details": "تفاصيل الدفع",
     "Payment Id": "رقم الدفع",
-    "Total Amount": "المبلغ الإجمالي"
+    "Total Amount": "المبلغ الإجمالي",
+    "Category": "الفئة",
+    "Available on stock": "متوفر في المخزون",
+    "Colors": "الألوان",
+    "Storages": "التخزين",
+    "Receipt and delivery": "الاستلام والتوصيل",
+    "Secure payment": "الدفع الآمن",
+    "Safe delivery": "التوصيل الآمن",
+    "Fast delivery": "التوصيل السريع"
 }

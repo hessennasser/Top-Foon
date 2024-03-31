@@ -12,6 +12,7 @@
     "email": "Email",
     "allRightsReserved": "All rights reserved",
     "AddToCart": "Add To Cart",
+    "Add to Cart": "Add To Cart",
     "Cart Content": "Cart Content",
     "Price": "Price",
     "Quantity": "Quantity",
@@ -159,5 +160,13 @@
     "Paid": "Paid",
     "Payment Details": "Payment Details",
     "Payment Id": "Payment Id",
-    "Total Amount": "Total Amount"
+    "Total Amount": "Total Amount",
+    "Category": "Category",
+    "Available on stock": "Available on stock",
+    "Colors": "Colors",
+    "Storages": "Storages",
+    "Receipt and delivery": "Receipt and delivery",
+    "Secure payment": "Secure payment",
+    "Safe delivery": "Safe delivery",
+    "Fast delivery": "Fast delivery"
 }
