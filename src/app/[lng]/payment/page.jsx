@@ -6,8 +6,8 @@ import MoyasarForm from '@/components/payment/MoyasarForm';
 import { toast } from 'react-toastify';
 import { mainRequest } from '@/axiosConfig';
 import { apiUrl } from '@/apiUrl';
-import InvoiceInfo from '@/components/payment/invoiceInfo';
-import CartISavedItems from '@/components/payment/cartISavedItems';
+import InvoiceInfo from '@/components/payment/InvoiceInfo';
+import CartISavedItems from '@/components/payment/CartISavedItems';
 import InstallmentManagement from '@/components/payment/InstallmentManagement';
 import Loading from '@/components/Loading';
 import { useTranslation } from '../../i18n/client';
@@ -176,7 +176,7 @@ const Page = () => {
                 installmentDetails: []
             });
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [installmentDuration, calculateTotalPrice]);
 
     if (loading || !cart) {
