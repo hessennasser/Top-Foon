@@ -10,6 +10,7 @@ export const MainContext = createContext();
 
 function MainContextProvider({ children }) {
     const router = useRouter();
+    const [loading, setLoading] = useState(false);
 
     // Manage user
     const [user, setUser] = useState({});
@@ -33,11 +34,14 @@ function MainContextProvider({ children }) {
     // Get website settings data
     const [settings, setSettings] = useState();
     const getSettings = async () => {
+        setLoading(true);
         try {
             const response = await axios.get(`${apiUrl}/settings`);
             setSettings(response.data?.websiteSettings);
         } catch (error) {
             console.log(error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -49,10 +53,10 @@ function MainContextProvider({ children }) {
             const quantity = item.quantity || 1;
 
             // Determine the color
-            const color = item.metaData?.color || (item.colors && item.colors[0]);
+            const color = item.metaData?.color || item.product.colors[0];
 
             // Determine the storage
-            const storage = item.metaData?.storage || (item.storages && item.storages[0]);
+            const storage = item.metaData?.storage || item.product.storages[0];
 
             // Add the item to the cart
             await addToCartApi(item.product, quantity, color, storage);
@@ -95,6 +99,7 @@ function MainContextProvider({ children }) {
 
     const getUserCart = async () => {
         setLoadingCart(true);
+        setLoading(true);
         try {
             // Fetch user's cart from the backend
             const response = await mainRequest.get(`${apiUrl}/user-cart`);
@@ -104,6 +109,7 @@ function MainContextProvider({ children }) {
             console.error("Error syncing cart data with the backend:", error);
         } finally {
             setLoadingCart(false);
+            setLoading(false);
         }
     }
 
@@ -126,7 +132,6 @@ function MainContextProvider({ children }) {
         try {
             // Extract necessary properties from the item
             const { _id: productId } = item;
-            console.log(color, storage);
             // Send request to add item to cart with product ID, quantity, and metadata
             const response = await mainRequest.post(`${apiUrl}/add-to-cart`, { productId, quantity, color, storage });
 
@@ -198,6 +203,7 @@ function MainContextProvider({ children }) {
                 updateCartItemMetaData: updateCartItemMetaData,
                 calculateTotalPrice: calculateTotalPrice,
                 loadingCart: loadingCart,
+                mainLoading: loading
             }}>
             {children}
         </MainContext.Provider>

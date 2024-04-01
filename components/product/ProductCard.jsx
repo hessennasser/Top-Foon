@@ -12,7 +12,10 @@ const ProductCard = ({ item }) => {
     const { addToCart } = useContext(MainContext);
 
     const handleAddToCart = () => {
-        addToCart(item);
+        const cartItem = {
+            product: item
+        }
+        addToCart(cartItem);
     };
 
     return (
@@ -27,15 +30,15 @@ const ProductCard = ({ item }) => {
                         <span className="text-red-500 font-bold tracking-widest">${item?.discount}</span>
                         <span className="text-gray-600 line-through ml-2">${item?.price}</span>
                     </div>
-                    <div className="buttons-holder mt-4 flex items-center justify-between gap-2">
-                        <button onClick={handleAddToCart} className="btn main-btn flex-1 flex items-center justify-center gap-2 text-lg md:!text-xs xl:!text-lg">
-                            <span className="hidden sm:inline-flex">{t("AddToCart")}</span>
-                            <RiShoppingCart2Line className="text-xl" />
-                        </button>
-                    </div>
                 </div>
             </Link>
-        </div>
+            <div className="buttons-holder mt-4 flex items-center justify-between gap-2">
+                <button onClick={handleAddToCart} className="btn main-btn flex-1 flex items-center justify-center gap-2 text-lg md:!text-xs xl:!text-lg">
+                    <span className="hidden sm:inline-flex">{t("AddToCart")}</span>
+                    <RiShoppingCart2Line className="text-xl" />
+                </button>
+            </div>
+        </div >
     )
 }
 

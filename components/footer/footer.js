@@ -4,7 +4,9 @@ import { MainContext } from '@/mainContext';
 import Image from 'next/image';
 import React, { useContext } from 'react';
 import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa';
-import PaymentImage from "../../public/payments.png"
+import PaymentImage from "../../public/payments.png";
+import logo from "../../public/logo.png";
+
 const Footer = () => {
     const { t } = useTranslation(); // Use useTranslation hook to get the t function
     const { settings } = useContext(MainContext);
@@ -13,7 +15,7 @@ const Footer = () => {
         <footer dir='rtl' className='bg-primaryColor text-white w-full px-4 pt-16 pb-6 mx-auto sm:px-6 lg:px-8 lg:pt-24'>
             <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
                 <div className='flex flex-col gap-4'>
-                    <Image src={settings?.logo?.url} alt={settings?.siteName} className='object-contain' width={150} height={50} />
+                    <Image src={settings?.logo?.url ? settings?.logo?.url : logo} alt={settings?.siteName} className='object-contain' width={150} height={50} />
                     <p>
                         {settings?.description}
                     </p>

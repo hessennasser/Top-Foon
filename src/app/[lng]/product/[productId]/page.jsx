@@ -100,7 +100,7 @@ const Page = ({ params }) => {
     }
 
     return (
-        <div className="container py-10">
+        <div className="container py-10" key={productId}>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-10 relative">
                 <div className="img-holder h-full lg:sticky top-0 col-span-3 md:col-span-2 lg:col-span-1 flex justify-center border p-4 shadow-lg rounded-md max-h-[400px]">
                     {product?.images && product?.images.length > 0 && (

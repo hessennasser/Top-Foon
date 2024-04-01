@@ -39,7 +39,7 @@ const Page = () => {
 
     const calculateInstallmentAmount = () => {
         if (installmentDuration !== '0') {
-            let interestRate = installmentDuration === '6' ? 0.05 : 0.1; // Set interest rate based on installment duration
+            let interestRate = installmentDuration === '6' ? 0.05 : installmentDuration === '12' ? 0.1 : installmentDuration === '18' ? 0.15 : null; // Set interest rate based on installment duration
             let totalPrice = parseInt(calculateTotalPrice());
             let totalInterest = Math.ceil(totalPrice * (1 + interestRate));
             let firstInstallment = Math.ceil(totalInterest * 0.25) + 25; // Calculate first installment including 25% down payment and shipping fee

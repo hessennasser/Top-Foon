@@ -40,6 +40,7 @@ const InstallmentManagement = ({
                         <option value="0">{t('fullAmount')}</option>
                         <option value="6">6 {t('months')}</option>
                         <option value="12">12 {t('months')}</option>
+                        <option value="18">18 {t('months')}</option>
                     </select>
                 </div>
                 {

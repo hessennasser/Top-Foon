@@ -168,5 +168,15 @@
     "Receipt and delivery": "Receipt and delivery",
     "Secure payment": "Secure payment",
     "Safe delivery": "Safe delivery",
-    "Fast delivery": "Fast delivery"
+    "Fast delivery": "Fast delivery",
+    "Thank You!": "Thank You!",
+    "Oops!": "Oops!",
+    "Data mismatch detected. Please try again later or contact support for assistance.": "Data mismatch detected. Please try again later or contact support for assistance.",
+    "Order Details": "Order Details",
+    "Status": "Status",
+    "Amount": "Amount",
+    "Message": "Message",
+    "We appreciate your business and hope to see you again soon. For any inquiries, please contact our customer support team.": "We appreciate your business and hope to see you again soon. For any inquiries, please contact our customer support team.",
+    "Go To Your Purchases": "Go To Your Purchases",
+    "Invoice ID": "Invoice ID"
 }

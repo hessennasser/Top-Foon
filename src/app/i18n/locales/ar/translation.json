@@ -165,5 +165,15 @@
     "Receipt and delivery": "الاستلام والتوصيل",
     "Secure payment": "الدفع الآمن",
     "Safe delivery": "التوصيل الآمن",
-    "Fast delivery": "التوصيل السريع"
+    "Fast delivery": "التوصيل السريع",
+    "Thank You!": "شكرا لك!",
+    "Oops!": "عذرا!",
+    "Data mismatch detected. Please try again later or contact support for assistance.": "تم الكشف عن عدم تطابق البيانات. يرجى المحاولة مرة أخرى في وقت لاحق أو الاتصال بالدعم للمساعدة.",
+    "Order Details": "تفاصيل الطلب",
+    "Status": "الحالة",
+    "Amount": "المبلغ",
+    "Message": "الرسالة",
+    "We appreciate your business and hope to see you again soon. For any inquiries, please contact our customer support team.": "نقدر تعاملك معنا ونأمل أن نراك مرة أخرى قريبا. لأي استفسارات، يرجى الاتصال بفريق دعم العملاء لدينا.",
+    "Go To Your Purchases": "الانتقال إلى مشترياتك",
+    "Invoice ID": "رقم الفاتورة"
 }

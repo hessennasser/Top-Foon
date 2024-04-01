@@ -88,10 +88,17 @@ const Page = () => {
         return <Loading />
     }
 
+    if (!loadingCart && !cart) {
+        return <div className="container mx-auto my-8 text-start" >
+            <h1 className="text-3xl font-bold mb-4">{t('cart page')}</h1>
+            <p className="text-gray-600">{t('emptyCart')}</p>
+        </div>
+    }
+    console.log(cart);
     return (
         <div className="container mx-auto my-8 text-start" >
             <h1 className="text-3xl font-bold mb-4">{t('cart page')}</h1>
-            {cart?.length === 0 ? (
+            {(cart?.length === 0) ? (
                 <p className="text-gray-600">{t('emptyCart')}</p>
             ) : (
                 <>

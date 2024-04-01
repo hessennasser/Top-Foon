@@ -5,7 +5,6 @@ import axios from 'axios';
 import HeroSlider from '@/components/heroSlider/HeroSlider';
 import SlideCategory from '@/components/category/SlideCategory';
 import ProductsByCategory from '@/components/product/ProductsByCategory';
-import { useTranslation } from '../i18n/client';
 
 export default function Home({ params: { lng } }) {
   const [slides, setSlides] = useState([]);

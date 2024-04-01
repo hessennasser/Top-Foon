@@ -2,12 +2,14 @@
 import { MainContext } from "@/mainContext";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import { FaBars, FaShoppingBag, FaSignInAlt, FaTimes, FaUser } from "react-icons/fa";
 import userAvatar from "../../public/userAvatar.jpg";
 import SubMenu from "./SubMenu";
 import { useTranslation } from "@/src/app/i18n/client";
+import i18nConfig from "@/i18nConfig";
+import logo from "../../public/logo.png";
 
 const Navbar = () => {
     const { t, i18n } = useTranslation();
@@ -17,7 +19,10 @@ const Navbar = () => {
     const { settings, cart, user } = useContext(MainContext);
     const logged = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("userRegistration"))?.logged : null;
     const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+    const [selectedLang, setSelectedLang] = useState(i18n.language); // Initialize selected language with current language
 
+    const currentLocale = selectedLang;
+    const currentPathname = usePathname();
     const links = [
         {
             id: 1,
@@ -35,6 +40,10 @@ const Navbar = () => {
             url: `/${i18n.language}/contact-us`
         }
     ];
+
+    useEffect(() => {
+        setSelectedLang(i18n.language); // Set selected language when component mounts
+    }, []);
 
     const handleResize = () => {
         if (window.innerWidth >= 768) {
@@ -68,22 +77,29 @@ const Navbar = () => {
     };
 
     // Function to handle language change
-    const handleLanguageChange = (selectedLang) => {
-        // Change the language
-        i18n.changeLanguage(selectedLang);
+    const handleLanguageChange = e => {
+        const newLocale = e.target.value;
 
-        // Get the current URL
-        const currentUrl = window.location.href;
+        // set cookie for next-i18n-router
+        const days = 30;
+        const date = new Date();
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+        const expires = date.toUTCString();
+        document.cookie = `NEXT_LOCALE=${newLocale};expires=${expires};path=/`;
 
-        // Extract the base path without query parameters
-        const basePath = currentUrl.split(/\?/)[0];
+        // Update selected language
+        setSelectedLang(newLocale);
+        i18n.changeLanguage(newLocale);
 
-        // Build the new URL with the selected language
-        const newUrl = `/${selectedLang}`;
+        // Get the current URL and split it into pathname and query string
+        const { pathname, search } = window.location;
 
-        // Redirect the user to the new URL
-        window.location.href = newUrl;
+        // redirect to the new locale path with preserved query parameters
+        router.push(pathname.replace(`/${currentLocale}`, `/${newLocale}`) + search);
+
+        router.refresh();
     };
+
 
     return (
         <>
@@ -95,7 +111,7 @@ const Navbar = () => {
                     <Link
                         href={`/${i18n.language}/`}
                     >
-                        <Image src={settings?.logo?.url} alt={settings?.siteName} className='object-contain' width={50} height={50} />
+                        <Image loading="lazy" src={settings?.logo?.url ? settings?.logo?.url : logo} alt={settings?.siteName} className='object-contain' width={50} height={50} />
                     </Link>
                 </div>
 
@@ -145,7 +161,7 @@ const Navbar = () => {
                         <span
                             className="absolute w-7 h-7 bg-orange-500 -top-5 right-2 text-white rounded-full flex items-center justify-center"
                         >
-                            {cart?.length}
+                            {cart?.length || 0}
                         </span>
                     </Link>
                     <div
@@ -157,9 +173,10 @@ const Navbar = () => {
                 </div>
 
                 {/* Language Selector */}
-                <select value={i18n.language} onChange={(e) => handleLanguageChange(e.target.value)} className="ml-2 focus:outline-none">
-                    <option value="en">English</option>
-                    <option value="ar">Arabic</option>
+                <select value={selectedLang} onChange={(e) => handleLanguageChange(e)} className="ml-2 focus:outline-none">
+                    {i18nConfig.locales.map(lang => (
+                        <option key={lang} value={lang}>{lang.toUpperCase()}</option>
+                    ))}
                 </select>
 
                 {nav && (

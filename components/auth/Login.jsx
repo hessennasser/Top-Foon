@@ -107,11 +107,11 @@ const Login = () => {
 
     useEffect(() => {
         if (user?.logged || logged) {
-            navigate("/")
+            router.push("/")
         }
 
         if (user?.activationToken && (!user.active || user.active === false)) {
-            navigate("/active-account")
+            router.push("/active-account")
         }
 
     }, [])

@@ -5,6 +5,7 @@ import 'swiper/css/pagination';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { useTranslation } from '@/src/app/i18n/client';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const SlideCategory = ({ categories }) => {
     const { t, i18n } = useTranslation();
@@ -41,11 +42,11 @@ const SlideCategory = ({ categories }) => {
                     categories?.map((item, index) => (
                         <SwiperSlide key={index} className=''>
                             <div className="flex flex-col gap-4 items-center">
-                                <Image width={100} height={160} className='w-full h-40 object-contain' src={item?.image?.url} />
+                                <Image width={100} height={160} className='w-full h-40 object-contain' src={item?.image?.url} alt={item?.name[i18n.language]} />
                                 <div className="flex flex-col gap-2 w-full text-center">
-                                    <a href={`/#${item?.name[i18n.language]}`} className='main-btn w-full'>
+                                    <Link href={`/#${item?.name[i18n.language]}`} className='main-btn w-full'>
                                         {item?.name[i18n.language]}
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </SwiperSlide>

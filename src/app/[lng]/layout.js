@@ -6,6 +6,8 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { dir } from 'i18next'
 import { languages } from '../i18n/settings'
+import { Suspense } from "react";
+import Loading from "@/components/Loading";
 
 export async function generateStaticParams() {
   return languages.map((lng) => ({ lng }))
@@ -38,11 +40,13 @@ export default function RootLayout({
           theme="light"
         />
         <Providers>
-          <Navbar />
-          <main className="root">
-            {children}
-          </main>
-          <Footer />
+          <Suspense fallback={<Loading />}>
+            <Navbar />
+            <main className="root">
+              {children}
+            </main>
+            <Footer />
+          </Suspense>
         </Providers>
       </body>
     </html >
