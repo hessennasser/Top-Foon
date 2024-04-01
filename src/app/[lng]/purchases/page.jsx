@@ -87,6 +87,7 @@ const Page = () => {
                                                             <th scope="col" className="px-6 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                                 {t('Product Name')}
                                                             </th>
+
                                                             <th scope="col" className="px-6 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                                 {t('Price')}
                                                             </th>
@@ -99,6 +100,8 @@ const Page = () => {
                                                         {order.items.map((item, index) => (
                                                             <tr key={index}>
                                                                 <td className="px-6 py-2 whitespace-nowrap">{item.product.name[i18n.language]}</td>
+                                                                <td className="px-6 py-2 whitespace-nowrap">{item.color}</td>
+                                                                <td className="px-6 py-2 whitespace-nowrap">{item.storage?.name}</td>
                                                                 <td className="px-6 py-2 whitespace-nowrap">${item.totalForItem}</td>
                                                                 <td className="px-6 py-2 whitespace-nowrap">{item.quantity}</td>
                                                             </tr>
