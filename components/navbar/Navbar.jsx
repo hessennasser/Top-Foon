@@ -100,11 +100,11 @@ const Navbar = () => {
         router.refresh();
     };
 
-
+    console.log(user);
     return (
         <>
             {
-                logged && profileMenuOpen && <SubMenu user={user} />
+                logged && profileMenuOpen && <SubMenu user={user} setProfileMenuOpen={setProfileMenuOpen} />
             }
             <div className="flex justify-between items-center w-full h-20 px-4 sticky top-0 bg-white shadow-lg nav z-10">
                 <div>
@@ -151,7 +151,7 @@ const Navbar = () => {
                             :
                             (
                                 <button onClick={() => setProfileMenuOpen(!profileMenuOpen)}>
-                                    <Image width="50" height="50" className="rounded-full" src={userAvatar} alt="User Avatar" />
+                                    <Image width="35" height="35" className="rounded-full ms-2" src={user?.userInfo?.avatar?.url ? user?.userInfo?.avatar?.url : userAvatar} alt="User Avatar" />
                                 </button>
                             )
                     }

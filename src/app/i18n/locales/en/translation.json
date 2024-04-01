@@ -105,6 +105,7 @@
     "loginFormErrorEmailFormat": "Invalid email format",
     "loginFormErrorPasswordLength": "Password must be at least 8 characters long",
     "loginSuccessMessage": "Login successful.",
+    "Invalid email or password": "Invalid email or password",
     "loginFailedMessage": "Login failed. Please try again later.",
     "loginErrorMessage": "An error occurred. Please try again later.",
     "signUpTitle": "Sign Up",
@@ -178,5 +179,19 @@
     "Message": "Message",
     "We appreciate your business and hope to see you again soon. For any inquiries, please contact our customer support team.": "We appreciate your business and hope to see you again soon. For any inquiries, please contact our customer support team.",
     "Go To Your Purchases": "Go To Your Purchases",
-    "Invoice ID": "Invoice ID"
+    "Invoice ID": "Invoice ID",
+    "Account": "Account",
+    "Your Information": "Your Information",
+    "Invalid Email": "Invalid Email",
+    "Save Changes": "Save Changes",
+    "Saving...": "Saving...",
+    "Edit Profile": "Edit Profile",
+    "Cancel": "Cancel",
+    "Profile": "Profile",
+    "Your Name": "Your Name",
+    "Your Email": "Your Email",
+    "Current Password": "Current Password",
+    "New Password": "New Password",
+    "Confirm Password": "Confirm Password",
+    "Change Password": "Change Password"
 }

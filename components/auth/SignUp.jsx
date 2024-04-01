@@ -113,7 +113,7 @@ const SignUp = () => {
         }
 
         // Redirect if user needs activation
-        if (user?.activationToken && (!user.active || user.active === false)) {
+        if (user?.activationToken && (user.active || user.active === false)) {
             router.push("/activeAccount");
         }
     }, []);

@@ -101,6 +101,7 @@
     "loginFormErrorPasswordLength": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
     "loginSuccessMessage": "تم تسجيل الدخول بنجاح.",
     "loginFailedMessage": "فشل تسجيل الدخول. حاول مرة اخرى.",
+    "Invalid email or password": "البريد الإلكتروني أو كلمة السر خاطئة",
     "loginErrorMessage": "حدث خطأ. الرجاء معاودة المحاولة في وقت لاحق.",
     "signUpTitle": "تسجيل مستخدم جديد",
     "signUpUsing": "التسجيل باستخدام",
@@ -175,5 +176,19 @@
     "Message": "الرسالة",
     "We appreciate your business and hope to see you again soon. For any inquiries, please contact our customer support team.": "نقدر تعاملك معنا ونأمل أن نراك مرة أخرى قريبا. لأي استفسارات، يرجى الاتصال بفريق دعم العملاء لدينا.",
     "Go To Your Purchases": "الانتقال إلى مشترياتك",
-    "Invoice ID": "رقم الفاتورة"
+    "Invoice ID": "رقم الفاتورة",
+    "Account": "الحساب",
+    "Your Information": "معلوماتك",
+    "Invalid Email": "بريد إلكتروني غير صالح",
+    "Save Changes": "حفظ التغييرات",
+    "Saving...": "جاري الحفظ...",
+    "Edit Profile": "تعديل الملف الشخصي",
+    "Cancel": "إلغاء",
+    "Profile": "الملف الشخصي",
+    "Your Name": "اسمك",
+    "Your Email": "بريدك الإلكتروني",
+    "Current Password": "كلمة المرور الحالية",
+    "New Password": "كلمة المرور الجديدة",
+    "Confirm Password": "تأكيد كلمة المرور",
+    "Change Password": "تغيير كلمة المرور"
 }

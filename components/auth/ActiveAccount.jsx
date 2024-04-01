@@ -13,11 +13,11 @@ const ActiveAccount = () => {
     const userActive = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("userRegistration")) : null;
 
     useEffect(() => {
-        if (userActive && (!userActive?.activationToken || (user && user.active))) {
+        if (!userActive && (!userActive?.activationToken || (!user && !user.active))) {
             router.push("/signUp");
         }
     }, []);
-
+    console.log(!userActive && (!userActive?.activationToken || (!user && !user.active)));
     const [activationCode, setActivationCode] = useState("");
 
     // Create refs for each input field

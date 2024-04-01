@@ -14,7 +14,7 @@ import Image from "next/image";
 
 const Login = () => {
     const router = useRouter();
-    const { t, i18n } = useTranslation(); // Access translation functions
+    const { t } = useTranslation(); // Access translation functions
     const { cart, settings, user, setUser } = useContext(MainContext);
     const logged = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("userRegistration"))?.logged : null;
     const [loading, setLoading] = useState(false);
@@ -92,14 +92,19 @@ const Login = () => {
             if (response.status === 200) {
                 // Display success message
                 toast.success(t("loginSuccessMessage"));
-                await syncCartWithBackend()
                 router.push("/");
-            } else {
+            }
+            else {
                 toast.error(t("loginFailedMessage"));
             }
         } catch (error) {
             console.error("Error during login:", error);
-            toast.error(t("loginErrorMessage"));
+            if (error.response.status === 401) {
+                // Display success message
+                toast.error(t("Invalid email or password"));
+            } else {
+                toast.error(t("loginErrorMessage") + error.message);
+            }
         } finally {
             setLoading(false);
         }

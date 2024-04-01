@@ -17,6 +17,37 @@ function MainContextProvider({ children }) {
     const [cart, setCart] = useState([]);
     const [loadingCart, setLoadingCart] = useState(false);
 
+    const getUserInfo = async () => {
+        setLoading(true);
+        try {
+            // Fetch user's info from the backend
+            const response = await mainRequest.get(`${apiUrl}/me`);
+            const userInfo = response.data.user;
+
+            // Get existing userRegistration from localStorage
+            const existingUserRegistration = JSON.parse(localStorage.getItem('userRegistration'));
+
+            // Update userInfo in existing userRegistration
+            const updatedUserRegistration = {
+                ...existingUserRegistration,
+                userInfo: {
+                    ...existingUserRegistration.userInfo,
+                    ...userInfo, // Merge userInfo from response with existing userInfo
+                },
+            };
+
+            // Save updated userRegistration back to localStorage
+            localStorage.setItem('userRegistration', JSON.stringify(updatedUserRegistration));
+
+            // Update state with updated userRegistration
+            setUser(updatedUserRegistration);
+        } catch (error) {
+            console.error("Error syncing user data with the backend:", error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
     // Logout
     const logout = async () => {
         try {
@@ -114,7 +145,6 @@ function MainContextProvider({ children }) {
     }
 
     useEffect(() => {
-        getSettings();
 
         if (localStorage.getItem("userRegistration")) {
             setUser(JSON.parse(localStorage.getItem("userRegistration")));
@@ -187,10 +217,17 @@ function MainContextProvider({ children }) {
         }
     };
 
+    useEffect(() => {
+        getSettings();
+        if (JSON.parse(localStorage.getItem("userRegistration"))) {
+            getUserInfo();
+        }
+    }, [])
 
     return (
         <MainContext.Provider
             value={{
+                getUserInfo,
                 user: user,
                 setUser: setUser,
                 logout: logout,

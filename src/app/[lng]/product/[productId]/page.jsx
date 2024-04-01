@@ -60,7 +60,7 @@ const Page = ({ params }) => {
     };
 
     const handleDecrement = () => {
-        if (quantity > 1) {
+        if (quantityInput > 1) {
             setQuantityInput((prev) => prev - 1);
         }
     };
