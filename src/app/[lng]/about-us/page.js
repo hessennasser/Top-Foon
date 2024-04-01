@@ -1,12 +1,14 @@
 "use client"
-import { MainContext } from '@/mainContext';
 import Image from 'next/image';
 import React, { useContext } from 'react'
 import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import PaymentImage from "../../../../public/payments.png"
+import { useTranslation } from '../../i18n/client';
+import { MainContext } from '@/mainContext';
 
-const page = () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+const Page = () => {
+    const { t } = useTranslation(); // Initialize useTranslation hook
+
     const { settings } = useContext(MainContext);
 
     return (
@@ -15,10 +17,10 @@ const page = () => {
             <h2>{settings?.siteName}</h2>
             <p className='max-w-md'>{settings?.description}</p>
             <div className="flex flex-col items-center justify-center gap-4">
-                <h2 className='text-xl font-bold'>اتصل بنا</h2>
-                <p>العنوان: {settings?.contactInfo?.address}</p>
-                <p>الهاتف: {settings?.contactInfo?.phone}</p>
-                <p>البريد الإلكتروني: {settings?.contactInfo?.email}</p>
+                <h2 className='text-xl font-bold'>{t('Contact Us')}</h2>
+                <p>{t('Address')}: {settings?.contactInfo?.address}</p>
+                <p>{t('Phone')}: {settings?.contactInfo?.phone}</p>
+                <p>{t('Email')}: {settings?.contactInfo?.email}</p>
             </div>
             <div className="flex flex-col justify-center">
                 <div className="flex gap-2 justify-center ">
@@ -32,10 +34,10 @@ const page = () => {
                         <FaInstagram size={24} />
                     </a>
                 </div>
-                <Image src={PaymentImage} alt="Payment Methods" className='object-contain' width={150} height={50} />
+                <Image src={PaymentImage} alt={t('Payment Methods')} className='object-contain' width={150} height={50} />
             </div>
-        </div >
+        </div>
     )
 }
 
-export default page
+export default Page;

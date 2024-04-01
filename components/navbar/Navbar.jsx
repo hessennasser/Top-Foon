@@ -100,7 +100,6 @@ const Navbar = () => {
         router.refresh();
     };
 
-    console.log(user);
     return (
         <>
             {

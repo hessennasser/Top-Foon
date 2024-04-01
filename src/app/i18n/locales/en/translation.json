@@ -193,5 +193,7 @@
     "Current Password": "Current Password",
     "New Password": "New Password",
     "Confirm Password": "Confirm Password",
-    "Change Password": "Change Password"
+    "Change Password": "Change Password",
+    "Uploading...": "Uploading...",
+    "Update Avatar": "Update Avatar"
 }

@@ -240,7 +240,8 @@ function MainContextProvider({ children }) {
                 updateCartItemMetaData: updateCartItemMetaData,
                 calculateTotalPrice: calculateTotalPrice,
                 loadingCart: loadingCart,
-                mainLoading: loading
+                mainLoading: loading,
+                setLoading
             }}>
             {children}
         </MainContext.Provider>

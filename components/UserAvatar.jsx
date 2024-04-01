@@ -5,11 +5,13 @@ import { apiUrl } from '@/apiUrl';
 import { MainContext } from '@/mainContext';
 import { mainRequest } from '@/axiosConfig';
 import { FaEdit } from 'react-icons/fa';
+import { useTranslation } from '@/src/app/i18n/client';
 
 const UserAvatar = ({ currentAvatarUrl, canChangeAvatar }) => {
     const [newAvatar, setNewAvatar] = useState(null);
+    const [loading, setLoading] = useState(false);
     const { getUserInfo } = useContext(MainContext);
-
+    const { t } = useTranslation()
     const handleAvatarChange = (e) => {
         const file = e.target.files[0];
         const reader = new FileReader();
@@ -21,6 +23,7 @@ const UserAvatar = ({ currentAvatarUrl, canChangeAvatar }) => {
 
     const handleAvatarUpload = async () => {
         if (newAvatar) {
+            setLoading(true); // Set loading to true before making the request
             try {
                 const data = { avatar: newAvatar };
                 const response = await mainRequest.put(`${apiUrl}/update-user-avatar`, data);
@@ -29,6 +32,8 @@ const UserAvatar = ({ currentAvatarUrl, canChangeAvatar }) => {
                 getUserInfo();
             } catch (error) {
                 console.error('Error uploading avatar:', error);
+            } finally {
+                setLoading(false); // Set loading back to false after the request is completed
             }
         }
     };
@@ -50,7 +55,9 @@ const UserAvatar = ({ currentAvatarUrl, canChangeAvatar }) => {
             </label>
             {canChangeAvatar && newAvatar && (
                 <div className='mt-4'>
-                    <button className='main-btn' onClick={handleAvatarUpload}>Update Avatar</button>
+                    <button className='main-btn' onClick={handleAvatarUpload} disabled={loading}>
+                        {loading ? t('Uploading...') : t('Update Avatar')}
+                    </button>
                 </div>
             )}
         </div>
