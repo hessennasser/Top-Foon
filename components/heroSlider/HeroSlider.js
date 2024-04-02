@@ -38,7 +38,7 @@ const HeroSlider = ({ slides }) => {
                     return (
                         <SwiperSlide key={item?._id}>
                             <div
-                                className={`hero-slide h-full relative overflow-hidden flex flex-col-reverse md:flex-row items-center justify-between md:gap-5 px-8`}
+                                className={`hero-slide h-full relative overflow-hidden flex flex-col-reverse md:flex-row items-center justify-between md:gap-5 px-8 py-10`}
                                 style={{
                                     backgroundColor: item?.colors?.background,
                                     color: item?.colors?.text
@@ -67,7 +67,7 @@ const HeroSlider = ({ slides }) => {
                                     <Image
                                         width={100}
                                         height={100}
-                                        className="max-h-[220px] md:max-h-[500px] w-full overflow-hidden object-cover"
+                                        className="w-40 md:w-60 py-4 max-h-[220px] md:max-h-[500px] overflow-hidden object-cover"
                                         src={item?.image?.url}
                                         alt={item?.title[i18n.language]}
                                     />
