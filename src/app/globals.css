@@ -162,3 +162,15 @@ html[dir="rtl"] .with-number-pagination .swiper-pagination.swiper-pagination-cli
     filter: brightness(.90);
     -webkit-filter: brightness(.90);
 }
+
+.product-description ul {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}

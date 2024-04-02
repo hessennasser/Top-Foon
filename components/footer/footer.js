@@ -17,7 +17,13 @@ const Footer = () => {
                 <div className='flex flex-col gap-4'>
                     <Image src={settings?.logo?.url ? settings?.logo?.url : logo} alt={settings?.siteName} className='object-contain' width={150} height={50} />
                     <p>
-                        {settings?.description}
+                        {/* {settings?.description} */}
+                        الوكيل الحصري المعتمد من شركتي آبل وسامسونج في الإمارات، فهو المتجر الإلكتروني الذي يوفّر لعملائه ميزات حصرية لا تجدها إلا هنا.
+                        أفضل الهواتف ذات الأداء الخرافي والميزات الاستثنائية تجدها متاحةً لك  في متجرنا. ويوفّر المتجر لك شراء هاتفك المُختار بالتقسيط وبسعر الكاش.
+                        يتيح متجر TOP FOON عروضًا وتخفيضات أسعار مستمرة بحيث تكون أسعاره أقل من أسعار السوق.
+                        تستطيع معنا استبدال هاتفك في حال فيه أي خلل، مع وجود ضمان عند شرائك لهاتف جديد لدينا.
+
+                        مع TOP FOON هاتف جديد بضمان تام، وبسعرٍ تنافسي نكسب به ثقتك.
                     </p>
                 </div>
                 <div className="flex flex-col justify-center lg:justify-start">

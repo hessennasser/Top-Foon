@@ -101,7 +101,7 @@ const Page = ({ params }) => {
 
     return (
         <div className="container py-10" key={productId}>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-10 relative">
+            <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-3 gap-4 mb-10 relative">
                 <div className="img-holder h-full lg:sticky top-0 col-span-3 md:col-span-2 lg:col-span-1 flex justify-center border p-4 shadow-lg rounded-md max-h-[400px]">
                     {product?.images && product?.images.length > 0 && (
                         <Swiper
@@ -124,7 +124,7 @@ const Page = ({ params }) => {
                         </Swiper>
                     )}
                 </div>
-                <div className="info-holder col-span-3 md:col-span-1 lg:col-span-1 h-full flex flex-col gap-4 border p-4 shadow-lg rounded-md">
+                <div className="info-holder col-span-3 md:col-span-2 lg:col-span-1 h-full flex flex-col gap-4 border p-4 shadow-lg rounded-md">
                     <h2 className="text-xl font-bold text-mainColor">{product?.name[i18n.language]}</h2>
                     <div className="Category my-2">
                         <strong>{t("Category")} : </strong>
@@ -157,15 +157,15 @@ const Page = ({ params }) => {
                         }
                     </div>
                 </div>
-                <div className="cart-holder col-span-3 md:col-span-1 lg:col-span-1 h-full flex flex-col gap-4 border p-4 shadow-lg rounded-md">
+                <div className="cart-holder col-span-3 md:col-span-4 lg:col-span-1 h-full flex flex-col gap-4 border p-4 shadow-lg rounded-md">
                     <div className="flex flex-col flex-1 gap-2">
                         <h2 className="text-xl font-semibold">{product?.name[t.language]}</h2>
                         <p className="text-gray-600">{t('price')}: ${product?.discount}</p>
-                        <div className="flex items-center gap-2">
-                            <p>{t('color')}: </p>
+                        <div className="flex items-center gap-2 flex-wrap">
+                            <p className="w-full">{t('color')}: </p>
                             {
                                 product.colors.map((color, index) => (
-                                    <div key={index} className="mr-2 flex items-center gap-1">
+                                    <div key={index} className="mr-2 flex items-center gap-1 flex-wrap">
                                         <label className="flex items-center gap-1">
                                             <input
                                                 type="radio"
@@ -180,7 +180,7 @@ const Page = ({ params }) => {
                             }
                         </div>
                         <div>
-                            <p>{t('storage')}: </p>
+                            <p className="mb-2">{t('storage')}: </p>
                             {
                                 product.storages.map((storage, index) => (
                                     <div key={index} className="me-2 flex gap-1">
@@ -216,8 +216,8 @@ const Page = ({ params }) => {
                     </div>
                 </div>
             </div>
-            <div className="w-full border p-4 shadow-lg rounded-md text-center">
-                <p>{product.description[i18n.language]}</p>
+            <div className="w-full border p-4 shadow-lg rounded-md">
+                <div className="product-description flex flex-col gap-2" dangerouslySetInnerHTML={{ __html: product.description[i18n.language] }} />
             </div>
             <div className="w-full flex flex-wrap items-center justify-between gap-5 my-5">
                 <div className="item flex flex-col gap-2 text-center text-lg justify-center items-center w-48 mx-auto">
