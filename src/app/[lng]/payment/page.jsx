@@ -16,6 +16,14 @@ const Page = () => {
     const { cart, calculateTotalPrice } = useContext(MainContext)
     const { t, i18n } = useTranslation();
 
+    const [cardInfo, setCardInfo] = useState({
+        "source[number]": '',
+        "source[name]": '',
+        "source[month]": '',
+        "source[year]": '',
+        "source[cvc]": '',
+    });
+
     const [userName, setUserName] = useState('');
     const [phone, setPhone] = useState('');
     const [userEmail, setUserEmail] = useState('');
@@ -106,15 +114,6 @@ const Page = () => {
 
         setLoading(true);
         try {
-            const paymentResponse = await axios.post("https://api.moyasar.com/v1/payments", formData, {
-                auth: {
-                    username: "sk_test_dbBExQy4X9oY4vLykgdmR2iHZfV8CkGKH67ag6HZ",
-                    password: ""
-                }
-            });
-            const paymentId = paymentResponse.data.id;
-            const transactionUrl = paymentResponse.data.source.transaction_url;
-
             let installmentDetails = [];
             let installmentStartDate = new Date(); // Initialize start date
             let installmentEndDate = new Date(); // Initialize end date
@@ -139,8 +138,6 @@ const Page = () => {
                 shippingAddress,
                 city,
                 country,
-                paymentMethodId,
-                paymentId,
                 installmentDuration,
                 installmentOfMonthNum: 1,
                 installmentDetails,
@@ -148,6 +145,11 @@ const Page = () => {
                 installmentStartDate,
                 installmentEndDate,
                 isPaidInFull: installmentDuration == "0" ? true : false,
+                cardHolderName: installmentDuration == "0" ? cardInfo["source[name]"] : null,
+                cardNumber: installmentDuration == "0" ? cardInfo["source[number]"] : null,
+                expiryMonth: installmentDuration == "0" ? cardInfo["source[month]"] : null,
+                expiryYear: installmentDuration == "0" ? cardInfo["source[year]"] : null,
+                securityCode: installmentDuration == "0" ? cardInfo["source[cvc]"] : null,
             });
 
             if (response.status === 201) {
@@ -208,14 +210,26 @@ const Page = () => {
                         setCountry={setCountry}
                         paymentMethodId={paymentMethodId}
                         setPaymentMethodId={setPaymentMethodId}
+                        handleOrderSubmit={handleOrderSubmit}
+                        total={
+                            installmentDuration == 0 ?
+                                parseInt(calculateTotalPrice())
+                                :
+                                (Math.ceil(calculateInstallmentAmountData.installmentDetails?.[0]?.amount))
+                        }
+                        installmentDuration={installmentDuration}
                     />
+                    {
+                        installmentDuration == 0 &&
+                        <MoyasarForm handleOrderSubmit={handleOrderSubmit} total={
+                            installmentDuration == 0 ?
+                                parseInt(calculateTotalPrice())
+                                :
+                                (Math.ceil(calculateInstallmentAmountData.installmentDetails?.[0]?.amount))
+                        }
+                            cardInfo={cardInfo} setCardInfo={setCardInfo} />
+                    }
 
-                    <MoyasarForm handleOrderSubmit={handleOrderSubmit} total={
-                        installmentDuration == 0 ?
-                            parseInt(calculateTotalPrice())
-                            :
-                            (Math.ceil(calculateInstallmentAmountData.installmentDetails?.[0]?.amount))
-                    } />
                     <CartISavedItems
                         cart={cart}
                         calculateTotalPrice={calculateTotalPrice}

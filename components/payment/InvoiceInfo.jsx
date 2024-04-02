@@ -4,14 +4,14 @@ import { useTranslation } from "@/src/app/i18n/client"
 const InvoiceInfo = (props) => {
     const { userName, setUserName, phone, setPhone, userEmail, setUserEmail,
         shippingAddress, setShippingAddress, city, setCity, country, setCountry,
-        paymentMethodId, setPaymentMethodId } = props;
+        paymentMethodId, setPaymentMethodId, total, handleOrderSubmit, installmentDuration } = props;
 
     const { t } = useTranslation();
 
     return (
         <div className="order-2 col-span-2 md:col-span-1">
             <h2 className="text-xl font-bold mb-4 bg-primaryColor py-4 text-center text-white">{t('invoiceInfo')}</h2>
-            <form className="shadow-md p-4 rounded-lg">
+            <form className="shadow-md p-4 rounded-lg" onSubmit={handleOrderSubmit}>
                 <div className="mb-4">
                     <label htmlFor="name" className="block mb-1 opacity-75">{t('name')}:</label>
                     <input
@@ -91,6 +91,16 @@ const InvoiceInfo = (props) => {
                         <option value="creditcard" selected>{t('creditCard')}</option>
                     </select>
                 </div>
+                {
+                    installmentDuration != 0 && (
+                        <button
+                            type="submit"
+                            className="w-full px-4 py-2 text-sm font-semibold text-white uppercase bg-mainColor rounded-lg focus:outline-none focus:shadow-outline"
+                        >
+                            {t('purchaseButton', { total })}
+                        </button>
+                    )
+                }
             </form>
         </div>
     )

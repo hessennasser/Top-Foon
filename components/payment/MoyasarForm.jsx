@@ -2,15 +2,8 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const MoyasarForm = ({ handleOrderSubmit, total }) => {
+const MoyasarForm = ({ handleOrderSubmit, total, cardInfo, setCardInfo }) => {
     const { t } = useTranslation();
-    const [cardInfo, setCardInfo] = useState({
-        "source[number]": '',
-        "source[name]": '',
-        "source[month]": '',
-        "source[year]": '',
-        "source[cvc]": '',
-    });
     const [errors, setErrors] = useState({});
 
     const handleInputChange = (e) => {
