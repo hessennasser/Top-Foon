@@ -142,7 +142,7 @@ const Page = () => {
                                                     </div>
                                                     {!order.isPaidInFull ? (
                                                         <div className="mb-2 border-t pt-2">
-                                                            <h3 className="text-md text-primaryColor sm:text-lg font-semibold mb-2">{t('Installment information')}</h3>
+                                                            {/* <h3 className="text-md text-primaryColor sm:text-lg font-semibold mb-2">{t('Installment information')}</h3>
                                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                                 <p>
                                                                     <strong>{t('Duration')}:</strong> {order.installmentDuration} {t('Months')}
@@ -157,7 +157,7 @@ const Page = () => {
                                                                 <p>
                                                                     <strong>{t('Installment Amount')}:</strong> {order.installmentAmount}
                                                                 </p>
-                                                            </div>
+                                                            </div> */}
                                                             <div className="overflow-auto mt-4">
                                                                 <table className="min-w-full divide-y divide-gray-200">
                                                                     <thead className="bg-gray-50">
@@ -188,8 +188,7 @@ const Page = () => {
                                                                                 <td className="px-6 py-4 whitespace-nowrap">{payment.month}</td>
                                                                                 <td className="px-6 py-4 whitespace-nowrap">
                                                                                     {
-                                                                                        index == 0 ? payment.paymentId :
-                                                                                            payment.invoiceId ? payment.invoiceId : 'N/A'
+                                                                                        payment.paymentId ? payment.paymentId : 'N/A'
                                                                                     }
                                                                                 </td>
                                                                                 <td className="px-6 py-4 whitespace-nowrap">{payment.paymentDate ? formatDate(payment.paymentDate) : 'N/A'}</td>
