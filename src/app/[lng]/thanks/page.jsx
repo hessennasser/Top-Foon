@@ -12,7 +12,7 @@ const ThanksPage = () => {
     const [loading, setLoading] = useState(true);
     useEffect(() => {
 
-        const fetchPayment = async () => {
+        const asyncPayment = async () => {
             try {
                 const response = await axios.get(`${apiUrl}/orders-async`);
                 setLoading(false);
@@ -23,7 +23,7 @@ const ThanksPage = () => {
         };
 
         if (typeof window !== 'undefined') {
-            fetchPayment();
+            asyncPayment();
         }
     }, []);
 
