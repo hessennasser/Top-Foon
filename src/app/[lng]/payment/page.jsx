@@ -13,7 +13,7 @@ import Loading from '@/components/Loading';
 import { useTranslation } from '../../i18n/client';
 
 const Page = () => {
-    const { cart, calculateTotalPrice } = useContext(MainContext)
+    const { cart, calculateTotalPrice, loadingCart } = useContext(MainContext)
     const { t, i18n } = useTranslation();
 
     const [cardInfo, setCardInfo] = useState({
@@ -95,22 +95,10 @@ const Page = () => {
             return toast.error(t('invalid_email'));
         }
 
-        const formData = new FormData();
-        formData.append('callback_url', `${window.location.origin}/thanks`);
-        formData.append('publishable_api_key', 'pk_test_RBba4cctrTXK4jBDBL3R9ykxx6V3186EuRp7c7gm');
-        formData.append('amount', Math.ceil(parseInt(calculateTotalPrice()) * 100));
-        formData.append('currnecy', "USD");
-        formData.append('source[type]', 'creditcard');
-
         // Include installment duration in the description
         const productDetailsParagraph = cart.map(item => (
             `${item.product.name[i18n.language]} - ${t('quantity')}: ${item.quantity} - ${t('price')}: ${item.product.price} USD - ${t('total_price')}: ${item.quantity * item.product.price} USD\n`
         )).join('. ');
-        formData.append('description', `${productDetailsParagraph}\n${t('installment_duration')}: ${installmentDuration}`);
-
-        for (const key in cardInfo) {
-            formData.append(key, cardInfo[key]);
-        }
 
         setLoading(true);
         try {
@@ -145,15 +133,16 @@ const Page = () => {
                 installmentStartDate,
                 installmentEndDate,
                 isPaidInFull: installmentDuration == "0" ? true : false,
-                cardHolderName: installmentDuration == "0" ? cardInfo["source[name]"] : null,
-                cardNumber: installmentDuration == "0" ? cardInfo["source[number]"] : null,
-                expiryMonth: installmentDuration == "0" ? cardInfo["source[month]"] : null,
-                expiryYear: installmentDuration == "0" ? cardInfo["source[year]"] : null,
-                securityCode: installmentDuration == "0" ? cardInfo["source[cvc]"] : null,
             });
-
+            console.log(response);
             if (response.status === 201) {
-                window.location.href = transactionUrl;
+                if (installmentDuration == 0) {
+                    window.open(response.data.orderCreated.redirect_url, "blank");
+                    window.location.href = "/purchases"
+                } else {
+                    window.open(response.data.orderCreated.installmentPayments[0].redirect_url, "blank");
+                    window.location.href = "/purchases"
+                }
             }
             setLoading(false);
         } catch (error) {
@@ -181,9 +170,17 @@ const Page = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [installmentDuration, calculateTotalPrice]);
 
-    if (loading || !cart) {
+    if (loading || loadingCart) {
         return <Loading />
     }
+
+    if (cart?.items?.length == 0 || cart?.length == 0) {
+        return <div className="container mx-auto my-8 text-start" >
+            <h1 className="text-3xl font-bold mb-4">{t('payment_page')}</h1>
+            <p className="text-gray-600">{t('emptyCart')}</p>
+        </div>
+    }
+
     return (
         <>
             <div className="container mx-auto my-8" >
@@ -194,7 +191,7 @@ const Page = () => {
                     setInstallmentDuration={setInstallmentDuration}
                     cart={cart}
                 />
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 relative">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 relative">
                     <InvoiceInfo
                         userName={userName}
                         setUserName={setUserName}
@@ -219,7 +216,7 @@ const Page = () => {
                         }
                         installmentDuration={installmentDuration}
                     />
-                    {
+                    {/* {
                         installmentDuration == 0 &&
                         <MoyasarForm handleOrderSubmit={handleOrderSubmit} total={
                             installmentDuration == 0 ?
@@ -228,7 +225,7 @@ const Page = () => {
                                 (Math.ceil(calculateInstallmentAmountData.installmentDetails?.[0]?.amount))
                         }
                             cardInfo={cardInfo} setCardInfo={setCardInfo} />
-                    }
+                    } */}
 
                     <CartISavedItems
                         cart={cart}

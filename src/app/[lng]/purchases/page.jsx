@@ -49,7 +49,7 @@ const Page = () => {
     if (loading) {
         return <Loading />
     }
-
+    console.log(purchasesOrders[purchasesOrders.length - 1]);
     return (
         <>
             <div className="container pt-5 pb-10">
@@ -87,6 +87,12 @@ const Page = () => {
                                                             <th scope="col" className="px-6 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                                 {t('Product Name')}
                                                             </th>
+                                                            <th scope="col" className="px-6 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                                {t('Color')}
+                                                            </th>
+                                                            <th scope="col" className="px-6 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                                {t('Storage')}
+                                                            </th>
 
                                                             <th scope="col" className="px-6 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                                 {t('Price')}
@@ -99,7 +105,7 @@ const Page = () => {
                                                     <tbody className="bg-white divide-y divide-gray-200">
                                                         {order.items.map((item, index) => (
                                                             <tr key={index}>
-                                                                <td className="px-6 py-2 whitespace-nowrap">{item.product.name[i18n.language]}</td>
+                                                                <td className="px-6 py-2 whitespace-nowrap">{item.product?.name[i18n.language]}</td>
                                                                 <td className="px-6 py-2 whitespace-nowrap">{item.color}</td>
                                                                 <td className="px-6 py-2 whitespace-nowrap">{item.storage?.name}</td>
                                                                 <td className="px-6 py-2 whitespace-nowrap">${item.totalForItem}</td>
@@ -202,7 +208,7 @@ const Page = () => {
                                                                                 <td className="px-6 py-4 whitespace-nowrap">
                                                                                     {
                                                                                         payment.paymentStatus !== 'Paid' ?
-                                                                                            <a href={payment?.invoiceUrl} target="_blank" rel="noopener noreferrer" className='main-btn'>
+                                                                                            <a href={payment?.redirect_url} target="_blank" rel="noopener noreferrer" className='main-btn'>
                                                                                                 {t('Pay now')}
                                                                                             </a>
                                                                                             :

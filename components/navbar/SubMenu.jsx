@@ -31,7 +31,7 @@ const SubMenu = ({ user, setProfileMenuOpen }) => {
     return (
         <div
             ref={menuRef}
-            className={`fixed top-20 ${i18n.language == "ar" ? "right" : "left"}-1/2 translate-x-1/2 md:${i18n.language == "ar" ? "left" : "right"}-20 md:translate-x-0 w-full max-w-72 md:max-w-sm rounded-lg bg-slate-500 text-white shadow-2xl p-4 flex flex-col gap-2 z-10`}
+            className={`fixed top-20 ${i18n.language == "ar" ? "left-3" : "right-3"} translate-x-0 w-full max-w-72 md:max-w-sm rounded-lg bg-slate-500 text-white shadow-2xl p-4 flex flex-col gap-2 z-10`}
         >
             <div className="flex items-center justify-between gap-4 border-b pb-4 border-gray-100">
                 <Image width="50" height="50" className="w-8 h-8 rounded-full" src={user?.userInfo?.avatar?.url ? user?.userInfo?.avatar?.url : userAvatar} alt="صورة المستخدم" />

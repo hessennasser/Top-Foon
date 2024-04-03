@@ -7,7 +7,7 @@ const CartISavedItems = ({ cart, calculateTotalPrice, calculateInstallmentAmount
     const { t, i18n } = useTranslation();
 
     return (
-        <div className="order-1 col-span-2 xl:col-span-1 h-full">
+        <div className="order-1 col-span-2 h-full">
             <h2 className="text-xl font-bold mb-4 bg-primaryColor py-4 text-center text-white">{t('cartContent')}</h2>
             <div className='shadow-md p-4 rounded-lg'>
                 <div className="grid grid-cols-1 gap-2 relative">

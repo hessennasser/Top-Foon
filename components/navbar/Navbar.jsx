@@ -34,11 +34,11 @@ const Navbar = () => {
             link: t('about'),
             url: `/${i18n.language}/about-us`
         },
-        {
-            id: 3,
-            link: t('contact'),
-            url: `/${i18n.language}/contact-us`
-        }
+        // {
+        //     id: 3,
+        //     link: t('contact'),
+        //     url: `/${i18n.language}/contact-us`
+        // }
     ];
 
     useEffect(() => {

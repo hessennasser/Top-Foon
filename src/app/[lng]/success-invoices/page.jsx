@@ -10,22 +10,28 @@ import Loading from '@/components/Loading';
 const SuccessInvoicesPage = () => {
     const { t } = useTranslation();
 
+    let queryParams = new URLSearchParams(window.location.search);
     const [paymentData, setPaymentData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [dataMismatch, setDataMismatch] = useState(false);
+    const [id, setId] = useState(null);
 
     useEffect(() => {
-        const queryParams = new URLSearchParams(window.location.search);
+        queryParams = new URLSearchParams(window.location.search);
         const invoice_id = queryParams.get('invoice_id');
 
         const fetchPayment = async () => {
+            const token = DJuHJ / WVmZyG4luOr / vLWB / GdpmyPx51Q3cNeWVedeYF2CwBVuZmFGdlAnrE2Spl
+            const baseURL = 'https://api-v2.ziina.com/api';
+            const options = {
+                headers: {
+                    Accept: 'application/json',
+                    Authorization: 'Bearer ' + token,
+                    'Content-Type': 'application/json'
+                }
+            };
             try {
-                const response = await axios.get(`https://api.moyasar.com/v1/invoices/${invoice_id}`, {
-                    auth: {
-                        username: "sk_test_dbBExQy4X9oY4vLykgdmR2iHZfV8CkGKH67ag6HZ",
-                        password: ""
-                    }
-                });
+                const response = await axios.get(baseURL + `/payment_intent/${invoice_id}`, { headers: options.headers });
                 setPaymentData(response.data);
                 const check = await mainRequest.put(`${apiUrl}/orders/changeInvoiceState/${response.data.id}`);
                 console.log(check);
@@ -42,29 +48,13 @@ const SuccessInvoicesPage = () => {
     }, []);
 
     useEffect(() => {
-        if (paymentData) {
-            const queryParams = new URLSearchParams(window.location.search);
-            const invoice_id = queryParams.get('invoice_id');
-            const status = queryParams.get('status');
-            const message = queryParams.get('message');
-
-            if (
-                paymentData.payments[0]?.invoice_id !== invoice_id ||
-                paymentData.status !== status
-            ) {
-                setDataMismatch(true);
-            }
-        }
-    }, [paymentData]);
+        const invoice_id = queryParams.get('id');
+        setId(invoice_id);
+    }, [queryParams]);
 
     if (loading) {
         return <Loading />;
     }
-
-    const queryParams = new URLSearchParams(window.location.search);
-    const invoice_id = queryParams.get('invoice_id');
-    const status = queryParams.get('status');
-    const message = queryParams.get('message');
 
     return (
         <div className="container mx-auto py-10 text-center">
@@ -84,15 +74,15 @@ const SuccessInvoicesPage = () => {
                         </div>
                         <div className='border-b border-mainColor pb-2'>
                             <p className="font-semibold">{t('Status')} :</p>
-                            <p>{status}</p>
+                            <p>{paymentData?.status}</p>
                         </div>
                         <div className='border-b border-mainColor pb-2'>
                             <p className="font-semibold">{t('Amount')} :</p>
-                            <p>{paymentData?.amount_format}</p>
+                            <p>{paymentData?.amount}</p>
                         </div>
                         <div className='border-b border-mainColor pb-2'>
                             <p className="font-semibold">{t('Message')} :</p>
-                            <p>{message}</p>
+                            <p>{paymentData?.message}</p>
                         </div>
                     </div>
                 </div>
