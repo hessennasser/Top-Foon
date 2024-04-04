@@ -5,10 +5,12 @@ import { mainRequest } from "./axiosConfig";
 import { apiUrl } from "./apiUrl";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useTranslation } from "./src/app/i18n/client";
 
 export const MainContext = createContext();
 
 function MainContextProvider({ children }) {
+    const { t } = useTranslation();
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 
@@ -94,6 +96,7 @@ function MainContextProvider({ children }) {
 
             // Refresh the user's cart
             await getUserCart();
+            toast.success(t("The item added to cart"))
         } else {
             // Inform the user to log in and redirect to the login page
             toast.info("Please log in to add items to your cart.");

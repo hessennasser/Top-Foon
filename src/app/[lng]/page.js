@@ -39,6 +39,7 @@ export default function Home({ params: { lng } }) {
     getAllSlides()
     getAllCategories()
   }, [])
+  
 
   return (
     <div>

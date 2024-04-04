@@ -11,6 +11,7 @@ import { mainRequest } from "@/axiosConfig";
 import Loading from "../Loading";
 import { useTranslation } from "@/src/app/i18n/client"; // Import the useTranslation hook
 import Image from "next/image";
+import loginImg from "../../public/account.jpeg"
 
 const Login = () => {
     const router = useRouter();
@@ -128,7 +129,7 @@ const Login = () => {
     return (
         <div className="grid md:grid-cols-2" >
             <div className="image">
-                <Image src="https://exclusive-ecommerce-client.vercel.app/assets/signup-img-5MB1hWiM.avif" alt="تسجيل دخول" className="w-full h-full object-cover" width={100} height={100} />
+                <Image width={100} height={100} src={loginImg} alt={t('signUpTitle')} className="w-full h-full object-cover" />
             </div>
             <div className="py-10 w-full max-w-full px-3 mx-auto mt-0 md:flex-0 shrink-0">
                 <div className="relative z-0 flex flex-col min-w-0 break-words bg-white border-0 shadow-soft-xl rounded-2xl bg-clip-border">

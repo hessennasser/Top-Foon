@@ -115,10 +115,10 @@ const Page = () => {
                                         <div key={productId} className="bg-white py-4 flex gap-4" dir="rtl">
                                             <Image height={100} width={100} className="border-l pl-2 w-[80px] object-contain" src={item?.thumbnail?.url} alt={item?.name[t.language]} />
 
-                                            <div className="flex flex-col flex-1 gap-2">
+                                            <div className="flex flex-col flex-1 gap-2 px-2">
                                                 <h2 className="text-xl font-semibold">{item?.name[t.language]}</h2>
                                                 <p className="text-gray-600">{t('price')}: ${item?.discount}</p>
-                                                <div className="flex items-center gap-2">
+                                                <div className="flex flex-col md:flex-row flex-wrap gap-2">
                                                     <p>{t('color')}: </p>
                                                     {
                                                         item.colors.map((color, index) => (
@@ -137,7 +137,7 @@ const Page = () => {
                                                         ))
                                                     }
                                                 </div>
-                                                <div className="flex items-center gap-2">
+                                                <div className="flex flex-col md:flex-row flex-wrap gap-2">
                                                     <p>{t('storage')}: </p>
                                                     {
                                                         item.storages.map((storage, index) => (
@@ -160,23 +160,23 @@ const Page = () => {
                                                     <FaRegSave /> {t('saveOptions')}
                                                 </button>
                                                 <div className="flex items-center">
-                                                    <button onClick={() => handleDecrement(cartItem)} className="w-10 h-full flex items-center justify-center bg-mainColor text-white">-</button>
+                                                    <button onClick={() => handleDecrement(cartItem)} className="w-8 h-full flex items-center justify-center bg-mainColor text-white">-</button>
                                                     <input
                                                         type="number"
                                                         value={quantityInputs[productId] || cartItem.quantity}
                                                         onChange={(e) => handleInputChange(productId, parseInt(e.target.value))}
                                                         className="w-20 h-full border border-gray-300 focus:outline-none px-2 py-1 text-center"
                                                     />
-                                                    <button onClick={() => handleIncrement(cartItem)} className="w-10 h-full flex items-center justify-center bg-mainColor text-white">+</button>
+                                                    <button onClick={() => handleIncrement(cartItem)} className="w-8 h-full flex items-center justify-center bg-mainColor text-white">+</button>
 
                                                     <button onClick={() => handleItemChange(productId)} className="main-btn h-full !bg-mainColor flex items-center justify-between gap-4 mr-2">
                                                         <FiRefreshCcw />
                                                     </button>
-                                                    <button onClick={() => handleRemoveItem(item._id)} className="main-btn !bg-red-500 flex items-center justify-between gap-4 mr-2">
-                                                        {t('remove')}<MdDelete />
-                                                    </button>
 
                                                 </div>
+                                                <button onClick={() => handleRemoveItem(item._id)} className="main-btn w-fit !bg-red-500 flex items-center justify-between gap-4">
+                                                    {t('remove')}<MdDelete />
+                                                </button>
                                                 <p className="text-gray-600 mt-2">{t('total')}: ${cartItem.totalForItem}</p>
                                             </div>
                                         </div>
